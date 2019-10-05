@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<!--==========================
+    Intro Section
+    ============================-->
+    <div class="container">
+        <h2 style="color: #50d8af;">Movies</h2>
+        <table class="table table-hover css-serial">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Poster</th>
+                    <th>Title</th>
+                    <th>Rating</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for movie in movies %}
+                <tr>
+                    <td>{{ loop.index + ((page - 1) * page_size) }}</td>
+                    <td><img src="{{ movie['poster'] }}" /></td>
+                    <td>{{ movie["title"] }}</td>
+                    <td>{{ movie["rating_wa"] }} </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan=3>
+                        {% for page_num in range(1, page_count) %}
+                            {% if page_num == page %}
+                                {{ page_num }}
+                            {% else %}
+                                <a href='?page={{ page_num }}'>{{ page_num }}</a>
+                            {% endif %}
+                            &nbsp;
+                        {% endfor %}
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+{% endblock content %}
